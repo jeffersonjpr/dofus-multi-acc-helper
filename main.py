@@ -4,7 +4,7 @@ import time
 import pygetwindow as gw
 import re
 
-MAIN_DELAY = 0.2
+MAIN_DELAY = 0.3
 
 # Press 'Alt' key before the loop starts
 pyautogui.press('altleft')
@@ -17,9 +17,13 @@ print("Dofus windows found:")
 for window in dofus_windows:
     print(window)
 
+
 def activate_window(window_name):
     try:
-        gw.getWindowsWithTitle(window_name)[0].activate()
+        window = gw.getWindowsWithTitle(window_name)[0]
+        window.activate()
+        while not window.isActive:
+            time.sleep(0.1)
         return
     except Exception as e:
         print(f"Error activating window: {e}")
@@ -32,6 +36,7 @@ def repeat_mouse_click(window_names):
         activate_window(window_name)
         time.sleep(MAIN_DELAY)
         pyautogui.click(mouse_position[0], mouse_position[1])
+
 
 def main():
     while True:

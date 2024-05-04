@@ -101,7 +101,7 @@ def main():
     queue_setup()
     print("Press F5 to click all windows once")
     print("Press F6 to click all windows twice")
-    print("Press F1 to end turn and go to the next window")
+    print("Press F2 to end turn and go to the next window")
     print("Press F8 to reset the queue")
     while True:
         if keyboard.is_pressed('f5'):
@@ -112,8 +112,8 @@ def main():
             while keyboard.is_pressed('f6'):
                 time.sleep(0.1)
             repeat_click_all_windows(dofus_windows, 2, 0)
-        if keyboard.is_pressed('f1'):
-            while keyboard.is_pressed('f1'):
+        if keyboard.is_pressed('f2'):
+            while keyboard.is_pressed('f2'):
                 time.sleep(0.1)
             end_turn_and_next()
         if keyboard.is_pressed('f8'):

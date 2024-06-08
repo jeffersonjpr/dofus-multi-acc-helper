@@ -31,9 +31,12 @@ def define_queue():
         print(window)
 
 def save_queue():
+    #delete file
+    open("queue.txt", "w").close()
+    
     with open("queue.txt", "w") as file:
         for window in dofus_queue:
-            file.write(f"{window[0]} {window[1]}\n")
+            file.write(f"{window[0]} | {window[1]}\n")
 
 def load_queue():
     global dofus_queue
@@ -99,9 +102,10 @@ def click_on_position(mouse_position, number_of_clicks, delay = MAIN_DELAY):
 def main():
     global current_index
     queue_setup()
+    print("Press F2 to end turn and go to the next window")
     print("Press F5 to click all windows once")
     print("Press F6 to click all windows twice")
-    print("Press F2 to end turn and go to the next window")
+    print("Press F7 to redefine the queue")
     print("Press F8 to reset the queue")
     while True:
         if keyboard.is_pressed('f5'):
@@ -116,14 +120,20 @@ def main():
             while keyboard.is_pressed('f2'):
                 time.sleep(0.1)
             end_turn_and_next()
+        if keyboard.is_pressed('f7'):
+            while keyboard.is_pressed('f7'):
+                time.sleep(0.1)
+            define_queue()
+            save_queue()
         if keyboard.is_pressed('f8'):
             while keyboard.is_pressed('f8'):
                 time.sleep(0.1)
+            print("Queue reset")
             current_index = 9
 
 def queue_setup():
     load_queue()
-    print("Press 'y' to define the queue, 'n' to continue")
+    print("Do you want to define the queue? (y/n)")
     input_ = input()
     if input_ == 'y':
         define_queue()
